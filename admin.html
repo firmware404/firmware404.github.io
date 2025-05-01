@@ -199,50 +199,38 @@
         welcomeEl.style.opacity = '0';
         welcomeEl.textContent = '';
         typeWriter("Connexion établie. Bonjour Chef Carcéral.", welcomeEl);
-        renderLogs();
+        fetchLogs();
       } else {
         errorMsg.style.display = 'block';
       }
     });
 
-    // Simple client-side traffic logger using localStorage
-    const trafficKey = 'securiteCarceralTrafficLogs';
-
-    function getCurrentDateTime() {
-      return new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+    // Fetch logs from backend API
+    function fetchLogs() {
+      fetch('/api/logs')
+        .then(response => response.json())
+        .then(logs => {
+          renderLogs(logs);
+        })
+        .catch(err => {
+          console.error('Failed to fetch logs:', err);
+        });
     }
 
-    function logVisit() {
-      const logs = JSON.parse(localStorage.getItem(trafficKey)) || [];
-      const newLog = {
-        ip: 'N/A', // IP not available client-side
-        datetime: getCurrentDateTime(),
-        page: window.location.pathname.split('/').pop() || 'index.html',
-        userAgent: navigator.userAgent
-      };
-      logs.push(newLog);
-      localStorage.setItem(trafficKey, JSON.stringify(logs));
-      return logs;
-    }
-
-    function renderLogs() {
-      const logs = JSON.parse(localStorage.getItem(trafficKey)) || [];
+    function renderLogs(logs) {
       const tbody = document.querySelector('#traffic-table tbody');
       tbody.innerHTML = '';
-      logs.slice().reverse().forEach(log => {
+      logs.forEach(log => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td>${log.ip}</td>
-          <td>${log.datetime}</td>
-          <td>${log.page}</td>
+          <td>${new Date(log.datetime).toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })}</td>
+          <td>${log.url}</td>
           <td><code>${log.userAgent}</code></td>
         `;
         tbody.appendChild(tr);
       });
     }
-
-    // Log current visit
-    logVisit();
   </script>
 </body>
 </html>
