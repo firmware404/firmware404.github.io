@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>À propos de nous - Sécurité Carcéral</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      font-family: 'Open Sans', sans-serif;
+      background: #0f111a;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+    h1, h2, h3 {
+      font-family: 'Roboto Slab', serif;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, #1a1c29 0%, #0f111a 80%);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: -1;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f111a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #44475a;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <header class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-md sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <h1 class="text-3xl font-bold text-cyan-400 tracking-wide select-none">Sécurité Carcéral</h1>
+      <nav>
+        <ul class="flex space-x-6 text-cyan-300 font-semibold text-sm">
+          <li><a href="index.html" class="hover:text-cyan-500 transition font-semibold"><i class="fas fa-home mr-1"></i>Accueil</a></li>
+          <li><a href="groupe.html" class="hover:text-cyan-500 transition">Groupes</a></li>
+          <li><a href="protocoles.html" class="hover:text-cyan-500 transition">Protocoles</a></li>
+          <li><a href="about.html" class="hover:text-cyan-500 transition font-bold underline">À propos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-6xl mx-auto px-6 py-10 space-y-8">
+    <section class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700 prose prose-invert max-w-none">
+      <h2 class="text-3xl font-bold mb-6">À propos de nous</h2>
+      <p>
+        La Sécurité Carcéral est une organisation dédiée à la protection et au maintien de l'ordre dans la zone carcérale. Notre équipe est composée de professionnels engagés, formés pour assurer la sécurité maximale tout en respectant les protocoles stricts et l'éthique.
+      </p>
+      <p>
+        Nous travaillons en étroite collaboration avec les différents groupes de sécurité, les scientifiques, et les autorités pour garantir un environnement sûr et contrôlé. Notre mission est de prévenir les incidents, gérer les situations complexes, et assurer la discipline dans la zone carcérale.
+      </p>
+      <p>
+        Ce site a été créé pour informer sur nos groupes, nos protocoles, et notre engagement envers la sécurité. Nous valorisons la transparence, la rigueur, et la collaboration pour atteindre nos objectifs.
+      </p>
+      <p>
+        Merci de votre intérêt pour la Sécurité Carcéral.
+      </p>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-inner text-center text-gray-400 text-sm py-4 select-none">
+    &copy; 2024 Sécurité Carcéral. Tous droits réservés.
+  </footer>
+</body>
+</html>
