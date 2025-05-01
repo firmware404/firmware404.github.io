@@ -7,7 +7,6 @@ const port = 3000;
 const logFilePath = path.join(__dirname, 'traffic.log');
 const adminPassword = 'CCFRSCTGLS';
 
-// Middleware to log requests
 app.use((req, res, next) => {
   const logEntry = {
     ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown',
@@ -25,10 +24,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files from securite-carcereal directory
 app.use(express.static(path.join(__dirname, 'securite-carcereal')));
 
-// Basic auth middleware for /api/logs
 function checkAuth(req, res, next) {
   const auth = req.headers.authorization;
   if (!auth) {
@@ -44,7 +41,6 @@ function checkAuth(req, res, next) {
   return res.status(401).send('Authentication required.');
 }
 
-// Endpoint to get logs for admin panel with basic auth
 app.get('/api/logs', checkAuth, (req, res) => {
   fs.readFile(logFilePath, 'utf8', (err, data) => {
     if (err) {
