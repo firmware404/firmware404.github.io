@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 
 const logFilePath = path.join(__dirname, 'traffic.log');
+const adminPassword = 'CCFRSCTGLS';
 
 // Middleware to log requests
 app.use((req, res, next) => {
@@ -27,8 +28,24 @@ app.use((req, res, next) => {
 // Serve static files from securite-carcereal directory
 app.use(express.static(path.join(__dirname, 'securite-carcereal')));
 
-// Endpoint to get logs for admin panel
-app.get('/api/logs', (req, res) => {
+// Basic auth middleware for /api/logs
+function checkAuth(req, res, next) {
+  const auth = req.headers.authorization;
+  if (!auth) {
+    res.set('WWW-Authenticate', 'Basic realm="Admin Area"');
+    return res.status(401).send('Authentication required.');
+  }
+  const b64auth = auth.split(' ')[1];
+  const [user, pass] = Buffer.from(b64auth, 'base64').toString().split(':');
+  if (pass === adminPassword) {
+    return next();
+  }
+  res.set('WWW-Authenticate', 'Basic realm="Admin Area"');
+  return res.status(401).send('Authentication required.');
+}
+
+// Endpoint to get logs for admin panel with basic auth
+app.get('/api/logs', checkAuth, (req, res) => {
   fs.readFile(logFilePath, 'utf8', (err, data) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to read logs' });
