@@ -13,6 +13,7 @@
       background: #0f111a;
       color: #e0e0e0;
       min-height: 100vh;
+      overflow: hidden;
     }
     h1, h2, h3 {
       font-family: 'Roboto Slab', serif;
@@ -39,51 +40,115 @@
         transform: translateY(0);
       }
     }
-    /* scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
+    /* FBI style loading animation */
+    .loader-container {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: #0f111a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
     }
-    ::-webkit-scrollbar-thumb {
-      background: #44475a;
-      border-radius: 4px;
+    .loader-text {
+      font-family: 'Roboto Slab', serif;
+      font-size: 2rem;
+      color: #00ffff;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      animation: flicker 1.5s infinite alternate;
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }
+      50% { opacity: 0.6; text-shadow: none; }
+    }
+    .progress-bar {
+      width: 300px;
+      height: 10px;
+      background: #222;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 2rem;
+      box-shadow: 0 0 10px #00ffff;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00ffff, #00aaff);
+      width: 0%;
+      animation: loading 5s linear forwards;
+    }
+    @keyframes loading {
+      to { width: 100%; }
+    }
+    /* After loading, show main content */
+    #main-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    #main-content.visible {
+      display: block;
+      opacity: 1;
+      overflow: auto;
     }
   </style>
 </head>
-<body class="flex flex-col min-h-screen">
-  <header class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-md sticky top-0 z-10">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <h1 class="text-3xl font-bold text-cyan-400 tracking-wide select-none">Sécurité Carcéral</h1>
-      <nav>
-        <ul class="flex space-x-6 text-cyan-300 font-semibold text-sm">
-          <li><a href="index.html" class="hover:text-cyan-500 transition font-semibold"><i class="fas fa-home mr-1"></i>Accueil</a></li>
-          <li><a href="groupe.html" class="hover:text-cyan-500 transition">Groupes</a></li>
-          <li><a href="protocoles.html" class="hover:text-cyan-500 transition">Protocoles</a></li>
-          <li><a href="about.html" class="hover:text-cyan-500 transition">À propos</a></li>
-        </ul>
-      </nav>
+<body>
+  <div class="loader-container" id="loader">
+    <div class="loader-text">Connexion en cours...</div>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
     </div>
-  </header>
+  </div>
 
-  <main class="flex-grow max-w-6xl mx-auto px-6 py-10 space-y-12">
-    <section class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
-      <h2 class="text-3xl font-bold text-cyan-400 mb-6">Bienvenue à la Sécurité Carcéral</h2>
-      <p class="mb-4">
-        La Sécurité Carcéral est responsable du maintien de l'ordre et de la sécurité dans la zone carcérale. Notre mission est d'assurer la protection des installations, la surveillance des détenus, et le respect des protocoles stricts pour garantir un environnement sûr et contrôlé.
-      </p>
-      <p class="mb-4">
-        Ce site présente les différents groupes de sécurité, leurs rôles, ainsi que les protocoles internes à respecter. Naviguez vers la page "Groupes" pour découvrir les responsabilités de chaque groupe, ou vers "Protocoles" pour consulter les règles et règlements officiels.
-      </p>
-      <p>
-        Nous valorisons la discipline, la collaboration, et le professionnalisme pour assurer la sécurité maximale dans notre zone d'opération.
-      </p>
-    </section>
-  </main>
+  <div id="main-content" class="flex flex-col min-h-screen">
+    <header class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-md sticky top-0 z-10">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-cyan-400 tracking-wide select-none">Sécurité Carcéral</h1>
+        <nav>
+          <ul class="flex space-x-6 text-cyan-300 font-semibold text-sm">
+            <li><a href="index.html" class="hover:text-cyan-500 transition font-semibold"><i class="fas fa-home mr-1"></i>Accueil</a></li>
+            <li><a href="groupe.html" class="hover:text-cyan-500 transition">Groupes</a></li>
+            <li><a href="protocoles.html" class="hover:text-cyan-500 transition">Protocoles</a></li>
+            <li><a href="about.html" class="hover:text-cyan-500 transition">À propos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <footer class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-inner text-center text-gray-400 text-sm py-4 select-none">
-    &copy; 2024 Sécurité Carcéral. Tous droits réservés.
-  </footer>
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-10 space-y-12">
+      <section class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
+        <h2 class="text-3xl font-bold text-cyan-400 mb-6">Bienvenue à la Sécurité Carcéral</h2>
+        <p class="mb-4">
+          La Sécurité Carcéral est responsable du maintien de l'ordre et de la sécurité dans la zone carcérale. Notre mission est d'assurer la protection des installations, la surveillance des détenus, et le respect des protocoles stricts pour garantir un environnement sûr et contrôlé.
+        </p>
+        <p class="mb-4">
+          Ce site présente les différents groupes de sécurité, leurs rôles, ainsi que les protocoles internes à respecter. Naviguez vers la page "Groupes" pour découvrir les responsabilités de chaque groupe, ou vers "Protocoles" pour consulter les règles et règlements officiels.
+        </p>
+        <p>
+          Nous valorisons la discipline, la collaboration, et le professionnalisme pour assurer la sécurité maximale dans notre zone d'opération.
+        </p>
+      </section>
+    </main>
+
+    <footer class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-inner text-center text-gray-400 text-sm py-4 select-none">
+      &copy; 2024 Sécurité Carcéral. Tous droits réservés.
+    </footer>
+  </div>
+
+  <script>
+    // Simulate loading then show main content
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        const mainContent = document.getElementById('main-content');
+        loader.style.display = 'none';
+        mainContent.classList.add('visible');
+        document.body.style.overflow = 'auto';
+      }, 5200); // match progress bar animation duration
+    });
+  </script>
 </body>
 </html>
