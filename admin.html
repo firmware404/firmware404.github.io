@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel - Sécurité Carcéral</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      font-family: 'Open Sans', sans-serif;
+      background: #0f111a;
+      color: #e0e0e0;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    h1, h2 {
+      font-family: 'Roboto Slab', serif;
+    }
+    header {
+      background: #111827;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    .logo {
+      height: 40px;
+      width: 40px;
+      border-radius: 6px;
+      margin-right: 0.75rem;
+    }
+    nav a {
+      color: #00ffff;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 1rem;
+    }
+    nav a:hover {
+      color: #00aaff;
+    }
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    th {
+      background-color: #111827;
+      color: #00ffff;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #1f2937;
+    }
+    .welcome-message {
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.5rem;
+      color: #00ffff;
+      margin-bottom: 1rem;
+      text-align: center;
+      animation: fadeInText 2s ease-in-out forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="flex items-center">
+      <img src="https://cdn.discordapp.com/icons/949302634894995456/9d76d322bf005c53d8774e051b3aa3dd.png?size=256" alt="Logo" class="logo" />
+      <h1>Sécurité Carcéral - Admin Panel</h1>
+    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="groupe.html">Groupes</a>
+      <a href="protocoles.html">Protocoles</a>
+      <a href="about.html">À propos</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="welcome" class="welcome-message"></div>
+    <h2>Journal de trafic du site</h2>
+    <table id="traffic-table" aria-label="Journal de trafic du site">
+      <thead>
+        <tr>
+          <th>IP</th>
+          <th>Date & Heure</th>
+          <th>Page visitée</th>
+          <th>Agent Utilisateur</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Logs will be inserted here -->
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    // Cortana style welcome message
+    const welcomeText = "Bonjour Chef Carcéral.";
+    const welcomeEl = document.getElementById('welcome');
+    let idx = 0;
+    function typeWriter() {
+      if (idx < welcomeText.length) {
+        welcomeEl.textContent += welcomeText.charAt(idx);
+        idx++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    typeWriter();
+
+    // Simple client-side traffic logger using localStorage
+    // Note: IP cannot be reliably obtained client-side; will use placeholder
+    const trafficKey = 'securiteCarceralTrafficLogs';
+
+    function getCurrentDateTime() {
+      return new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+    }
+
+    function logVisit() {
+      const logs = JSON.parse(localStorage.getItem(trafficKey)) || [];
+      const newLog = {
+        ip: 'N/A', // IP not available client-side
+        datetime: getCurrentDateTime(),
+        page: window.location.pathname.split('/').pop() || 'index.html',
+        userAgent: navigator.userAgent
+      };
+      logs.push(newLog);
+      localStorage.setItem(trafficKey, JSON.stringify(logs));
+      return logs;
+    }
+
+    function renderLogs() {
+      const logs = JSON.parse(localStorage.getItem(trafficKey)) || [];
+      const tbody = document.querySelector('#traffic-table tbody');
+      tbody.innerHTML = '';
+      logs.slice().reverse().forEach(log => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${log.ip}</td>
+          <td>${log.datetime}</td>
+          <td>${log.page}</td>
+          <td><code>${log.userAgent}</code></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Log current visit and render logs
+    logVisit();
+    renderLogs();
+  </script>
+</body>
+</html>
