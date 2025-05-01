@@ -19,7 +19,6 @@
     h1, h2, h3 {
       font-family: 'Roboto Slab', serif;
     }
-    /* subtle background texture */
     body::before {
       content: "";
       position: fixed;
@@ -29,7 +28,6 @@
       pointer-events: none;
       z-index: -1;
     }
-    /* fade-in animation */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -41,7 +39,6 @@
         transform: translateY(0);
       }
     }
-    /* FBI style loading animation */
     .loader-container {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -83,7 +80,6 @@
     @keyframes loading {
       to { width: 100%; }
     }
-    /* After loading, show main content */
     #main-content {
       display: none;
       opacity: 0;
@@ -94,7 +90,6 @@
       opacity: 1;
       overflow: auto;
     }
-    /* Cortana style message */
     #welcome-message {
       font-family: 'Roboto Slab', serif;
       font-size: 1.5rem;
@@ -159,7 +154,6 @@
   </div>
 
   <script>
-    // Simulate loading then show main content and welcome message
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loader');
@@ -169,7 +163,6 @@
         mainContent.classList.add('visible');
         document.body.style.overflow = 'auto';
 
-        // Show Cortana style welcome message with typing effect
         const message = "Bonjour Agent Carcéral.";
         let index = 0;
         function typeWriter() {
@@ -180,7 +173,7 @@
           }
         }
         typeWriter();
-      }, 5200); // match progress bar animation duration
+      }, 5200); 
     });
   </script>
 </body>
