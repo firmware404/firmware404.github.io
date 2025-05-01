@@ -82,6 +82,48 @@
         opacity: 1;
       }
     }
+    .login-container {
+      max-width: 400px;
+      margin: 3rem auto;
+      background: #111827;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #00ffff;
+    }
+    .login-container h2 {
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #00ffff;
+    }
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #00ffff;
+      color: #0f111a;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    .login-container button:hover {
+      background: #00aaff;
+    }
+    .error-message {
+      color: #ff5555;
+      text-align: center;
+      margin-bottom: 1rem;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -99,39 +141,71 @@
   </header>
 
   <main>
-    <div id="welcome" class="welcome-message"></div>
-    <h2>Journal de trafic du site</h2>
-    <table id="traffic-table" aria-label="Journal de trafic du site">
-      <thead>
-        <tr>
-          <th>IP</th>
-          <th>Date & Heure</th>
-          <th>Page visitée</th>
-          <th>Agent Utilisateur</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Logs will be inserted here -->
-      </tbody>
-    </table>
+    <div id="login-section" class="login-container">
+      <h2>Connexion Admin</h2>
+      <input type="password" id="admin-password" placeholder="Entrez le mot de passe" aria-label="Mot de passe admin" />
+      <button id="login-btn">Se connecter</button>
+      <div id="error-msg" class="error-message">Mot de passe incorrect. Veuillez réessayer.</div>
+    </div>
+
+    <div id="admin-content" style="display:none;">
+      <div id="welcome" class="welcome-message"></div>
+      <h2>Journal de trafic du site</h2>
+      <table id="traffic-table" aria-label="Journal de trafic du site">
+        <thead>
+          <tr>
+            <th>IP</th>
+            <th>Date & Heure</th>
+            <th>Page visitée</th>
+            <th>Agent Utilisateur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Logs will be inserted here -->
+        </tbody>
+      </table>
+    </div>
   </main>
 
   <script>
-    // Cortana style welcome message
-    const welcomeText = "Bonjour Chef Carcéral.";
+    const correctPassword = "CCFRSCTGLS";
+
+    const loginSection = document.getElementById('login-section');
+    const adminContent = document.getElementById('admin-content');
+    const loginBtn = document.getElementById('login-btn');
+    const passwordInput = document.getElementById('admin-password');
+    const errorMsg = document.getElementById('error-msg');
     const welcomeEl = document.getElementById('welcome');
-    let idx = 0;
-    function typeWriter() {
-      if (idx < welcomeText.length) {
-        welcomeEl.textContent += welcomeText.charAt(idx);
-        idx++;
-        setTimeout(typeWriter, 100);
+
+    function typeWriter(text, element, callback) {
+      let index = 0;
+      function type() {
+        if (index < text.length) {
+          element.textContent += text.charAt(index);
+          index++;
+          setTimeout(type, 100);
+        } else if (callback) {
+          callback();
+        }
       }
+      type();
     }
-    typeWriter();
+
+    loginBtn.addEventListener('click', () => {
+      const enteredPassword = passwordInput.value;
+      if (enteredPassword === correctPassword) {
+        loginSection.style.display = 'none';
+        adminContent.style.display = 'block';
+        welcomeEl.style.opacity = '0';
+        welcomeEl.textContent = '';
+        typeWriter("Connexion établie. Bonjour Chef Carcéral.", welcomeEl);
+        renderLogs();
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    });
 
     // Simple client-side traffic logger using localStorage
-    // Note: IP cannot be reliably obtained client-side; will use placeholder
     const trafficKey = 'securiteCarceralTrafficLogs';
 
     function getCurrentDateTime() {
@@ -167,9 +241,8 @@
       });
     }
 
-    // Log current visit and render logs
+    // Log current visit
     logVisit();
-    renderLogs();
   </script>
 </body>
 </html>
