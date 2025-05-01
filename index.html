@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sécurité Carcéral - Groupes de Sécurité</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      font-family: 'Open Sans', sans-serif;
+      background: #0f111a;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+    h1, h2, h3 {
+      font-family: 'Roboto Slab', serif;
+    }
+    /* subtle background texture */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, #1a1c29 0%, #0f111a 80%);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: -1;
+    }
+    /* fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f111a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #44475a;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <header class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-md sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <h1 class="text-3xl font-bold text-cyan-400 tracking-wide select-none">Sécurité Carcéral</h1>
+      <nav>
+        <ul class="flex space-x-6 text-cyan-300 font-semibold text-sm">
+          <li><a href="#groupe-a" class="hover:text-cyan-500 transition">Groupe A</a></li>
+          <li><a href="#groupe-b" class="hover:text-cyan-500 transition">Groupe B</a></li>
+          <li><a href="#groupe-c" class="hover:text-cyan-500 transition">Groupe C</a></li>
+          <li><a href="#groupe-d" class="hover:text-cyan-500 transition">Groupe D</a></li>
+          <li><a href="#groupe-e" class="hover:text-cyan-500 transition">Groupe E</a></li>
+          <li><a href="#groupe-f" class="hover:text-cyan-500 transition">Groupe F</a></li>
+          <li><a href="#groupe-g" class="hover:text-cyan-500 transition">Groupe G</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-6xl mx-auto px-6 py-10 space-y-12">
+    <section id="groupe-a" class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-3 flex items-center">
+        <i class="fas fa-shield-alt mr-3"></i> Groupe A
+      </h2>
+      <p>
+        Vont faire des patrouilles aléatoires et vérifier la vent. Si signalement de la vent via radio par un gars aux cams, ils interviennent à la place des autres groupes, pour faire partie de ce groupe ; Avoir des réflexes et être assez rapide en écrit pour faire vite des messages radio, savoir bien se positionner si la vent est ouverte.
+      </p>
+    </section>
+
+    <section id="groupe-b" class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-3 flex items-center">
+        <i class="fas fa-user-shield mr-3"></i> Groupe B
+      </h2>
+      <p>
+        Restes en stand-by derrière la ligne, assurent que les CD ne s'enfuient pas par l'entrée principale, dès l'arrivée d'un technicien, ils viennent l'escorte jusqu'à la vent. Pour faire partie de ce groupe il faut être un minimum fort en protection de VIP et Hold The Position.
+      </p>
+    </section>
+
+    <section id="groupe-c" class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-3 flex items-center">
+        <i class="fas fa-search mr-3"></i> Groupe C
+      </h2>
+      <p>
+        En gros ils patrouillent dans la Zone-D pour voir ce qui se passe, imaginons y'a une expérience, et bah le groupe C signale au groupe D de ça, et le groupe D va se rendre sur place pour voir si ils respectent leurs protos en zone carcérale ( car les AC c'est pas que de stand-by derrière la ligne mais assurer l'ordre ). Ils vérifient si tout va bien, et ajoutes une protection de sécurité si les CD arrivent à dépasser le groupe B, ils peuvent rester derrière la ligne grise en stand-by, et si il n'y a plus de cams venir voir en zone-D, et ajouter cette zone dans leur patrouille ( patrouilles plus fréquentes que le groupe A ). Pour faire partie de ce groupe il faut une bonne vision, minimum de shoot au cas ou y'a des IC qui arrivent Entré ZD, et surtout collaborer avec ses collègues.
+      </p>
+    </section>
+
+    <section id="groupe-d" class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-3 flex items-center">
+        <i class="fas fa-balance-scale mr-3"></i> Groupe D
+      </h2>
+      <p>
+        Vont assurer l'ordre et le respect des protocoles de chacuns en zone carcérale, regardent si les scientifiques respectent les protos ( transmissions radio etc.. contrat expliquer, si l'experience comporte la sécu, le motif de l'experience n'est pas mauvais etc.. et il me semble que les AC sont en droits de conclure l'experience donc c'est carrer ) Ils regardent aussi derriere la ZDS si il n'y a pas un AC qui a manquer à l'éthique ou un UT+ qui manque à l'article 5 en venant ZD.
+        Pour faire partie de ce groupe il faut une connaisance en protocoles, code éthique, savoir s'imposer et connaître ses droits ainsi que ceux de chacuns, savoir gérer des situations complexes ( même si solo ou qu'a 2 ), un shoot exemplaire n'est pas réelement requis.
+      </p>
+    </section>
+
+    <section id="groupe-e" class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-3 flex items-center">
+        <i class="fas fa-bolt mr-3"></i> Groupe E
+      </h2>
+      <p>
+        Le Groupe E reste en stand-by permanence garde pour intervenir UNIQUEMENT en cas d'émeute, fouille général, ou si un des groupes est dépasser, le shoot est PRIMORDIAL, et surtout surtout surtout avoir un aim de fou avec des bons réflexes, si besoin ils viennent enforcer le p5 en ZD.
+      </p>
+    </section>
+
+    <section id="groupe-f" class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-3 flex items-center">
+        <i class="fas fa-user-ninja mr-3"></i> Groupe F
+      </h2>
+      <p>
+        Ils sont la BRI de la zone carcérale en quoi, ils viennent pour perquise, récup des CD, ou bien des AC qui ont fait quelque chose de pas biens pour des raisons valides, ils viennent récupérer des CD armer ou les tuer, ils sont en contact direct avec le Groupe G qui les informe de tout CD armer ou à arréter, il guettent aussi la vent quand elle commence à être dévisée et cherches précieusement qui a oser retirer 1 visse. Faut être discret, un bon shoot pour des éliminations tah les snipers, donc viser tête et tuer rapidement, c'est pas une unité de contact direct pour aller se battre contre 5 CD armer, mais venir arrêter 1 CD ou 2 qui sont suspecter ou prit en flagrant délit.
+      </p>
+    </section>
+
+    <section id="groupe-g" class="fade-in bg-gray-900 bg-opacity-70 rounded-lg p-6 shadow-lg border border-cyan-700">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-3 flex items-center">
+        <i class="fas fa-video mr-3"></i> Groupe G
+      </h2>
+      <p>
+        En gros ils restent aux cams et derrière les vitres pour surveiller tous mouvements, et signalents tout, ils restent en permanence garde. Faut etre patient et etre habituer avec le systeme de cams.
+      </p>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-inner text-center text-gray-400 text-sm py-4 select-none">
+    &copy; 2024 Sécurité Carcéral. Tous droits réservés.
+  </footer>
+</body>
+</html>
