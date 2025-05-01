@@ -93,6 +93,21 @@
       opacity: 1;
       overflow: auto;
     }
+    /* Cortana style message */
+    #welcome-message {
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.5rem;
+      color: #00ffff;
+      margin-top: 2rem;
+      text-align: center;
+      animation: fadeInText 2s ease-in-out forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -130,6 +145,7 @@
         <p>
           Nous valorisons la discipline, la collaboration, et le professionnalisme pour assurer la sécurité maximale dans notre zone d'opération.
         </p>
+        <div id="welcome-message"></div>
       </section>
     </main>
 
@@ -139,14 +155,27 @@
   </div>
 
   <script>
-    // Simulate loading then show main content
+    // Simulate loading then show main content and welcome message
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loader');
         const mainContent = document.getElementById('main-content');
+        const welcomeMessage = document.getElementById('welcome-message');
         loader.style.display = 'none';
         mainContent.classList.add('visible');
         document.body.style.overflow = 'auto';
+
+        // Show Cortana style welcome message with typing effect
+        const message = "Bonjour Agent Carcéral.";
+        let index = 0;
+        function typeWriter() {
+          if (index < message.length) {
+            welcomeMessage.textContent += message.charAt(index);
+            index++;
+            setTimeout(typeWriter, 100);
+          }
+        }
+        typeWriter();
       }, 5200); // match progress bar animation duration
     });
   </script>
